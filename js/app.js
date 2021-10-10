@@ -1,6 +1,6 @@
 // Define Global Variables
 const sections = document.querySelectorAll('section[id]');
-const links = document.querySelectorAll('a[href*="#"]');
+// const links = document.querySelectorAll('a[href*="#"]');
 const scrollUp = document.getElementById('scroll-up');
 const pageHeader = document.getElementById('page__header');
 const btnToggle = document.getElementById('btn__toggle');
@@ -13,20 +13,21 @@ for (let i = 1; i <= sections.length; i++) {
   const navbarList = document.getElementById('navbar__list')
   const listItem = document.createElement('li');
   const linkItem = document.createElement("a")
-  const numberSection = `#section${i}`
+  const numberSection = `section${i}`
   linkItem.classList.add('menu__link')
-  linkItem.setAttribute("href", numberSection)
+  linkItem.setAttribute("id", numberSection)
   linkItem.innerHTML = `Section${i}`;
   listItem.append(linkItem);
   navbarList.appendChild(listItem)
 }
 
 // Scroll to section on link click
-
+const links = document.querySelectorAll('.menu__link')
 links.forEach(link => {
   link.addEventListener('click', function (e) {
     e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
+    const targetSection = e.target.outerText
+    document.querySelector('section[data-nav=' + targetSection + ']').scrollIntoView({
       behavior: 'smooth'
     });
   });
@@ -42,10 +43,10 @@ function scrollActive() {
     const sectionId = current.getAttribute('id')
 
     if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-      document.querySelector('.navbar__menu a[href*=' + sectionId + ']').classList.add('active-link')
+      document.querySelector('.navbar__menu a[id=' + sectionId + ']').classList.add('active-link')
     }
     else {
-      document.querySelector('.navbar__menu a[href*=' + sectionId + ']').classList.remove('active-link')
+      document.querySelector('.navbar__menu a[id=' + sectionId + ']').classList.remove('active-link')
     }
   })
 }
