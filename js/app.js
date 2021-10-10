@@ -16,6 +16,7 @@ for (let i = 1; i <= sections.length; i++) {
   const numberSection = `section${i}`
   linkItem.classList.add('menu__link')
   linkItem.setAttribute("id", numberSection)
+  linkItem.style.cursor = 'pointer'
   linkItem.innerHTML = `Section${i}`;
   listItem.append(linkItem);
   navbarList.appendChild(listItem)
